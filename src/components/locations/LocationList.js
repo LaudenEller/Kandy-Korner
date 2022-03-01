@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export const LocationList = () => {
     const [locations, setLocation] = useState([])
@@ -17,7 +17,7 @@ export const LocationList = () => {
         <>
             {
                 locations.map((location) => {
-                    return <p key={`location--${location.id}`}>[location.id]</p>
+                    return <p key={`location--${location.id}`}>{location.id}</p>
                 }
                 )
             }
