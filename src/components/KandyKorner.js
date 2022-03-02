@@ -1,17 +1,15 @@
 import React from "react";
-import { LocationList } from "./locations/LocationList"
-import { ProductList } from "./products/ProductList";
+import { NavBar } from "./nav/NavBar";
+import { Route, Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { ApplicationViews } from "./ApplicationViews";
+import "./KandyKorner.css"
 
 export const Kandy = () => {
     return (
         <>
-            <h1>Kandy Korner Candy Shoppe</h1>
 
-            <h2>Locations</h2>
-            <LocationList />
-
-            <h2>Products</h2>
-            <ProductList />
+            <NavBar />
+            <ApplicationViews />
 
         </>
     )
