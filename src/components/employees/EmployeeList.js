@@ -10,7 +10,7 @@ export const EmployeeList = () => {
    
     useEffect(
         () => {
-            fetch("http://localhost:8088/employees")
+            fetch("http://localhost:8088/employees?_expand=location")
                 .then(res => res.json())
                 .then((employeeArray) => { 
                     assignEmployees(employeeArray) } // invoke function that modifies data, do not modify data directly like in vanillaJs
@@ -26,7 +26,7 @@ export const EmployeeList = () => {
             {
                 employees.map(
                     (employeeObject) => {
-                        return <p key={`employee--${employeeObject.id}`}>{employeeObject.name}</p> // must use KEY attribute which acts like an Id for React
+                        return <p key={`employee--${employeeObject.id}`}>{employeeObject.name} works at our {employeeObject.location.name} location</p> // must use KEY attribute which acts like an Id for React
                     }
                 )
             }

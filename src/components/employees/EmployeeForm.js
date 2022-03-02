@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export const EmployeeForm = () => {
@@ -10,7 +10,20 @@ export const EmployeeForm = () => {
         hourlyRate: 16
     });
 
+    const [locations, updateLocation] = useState([])
+
     const history = useHistory()
+
+    useEffect(
+        () => {
+            fetch("http://localhost:8088/locations")
+                .then(res => res.json())
+                .then((locationArray) => { 
+                    updateLocation(locationArray) } // invoke function that modifies data, do not modify data directly like in vanillaJs
+                )
+        },
+        []
+    )
 
     const hireEmployee = (event) => {
         const newEmployee = {
@@ -18,8 +31,7 @@ export const EmployeeForm = () => {
             location: employee.locationId,
             manager: employee.manager,
             fullTime: employee.fullTime,
-            hourlyRate: employee.hourlyRate,
-            employeeId: 1
+            hourlyRate: employee.hourlyRate
         }
         
         event.preventDefault()
@@ -44,7 +56,7 @@ export const EmployeeForm = () => {
             <h2 className="employeeForm__title">New Employee</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Name: </label>
                     <input
                         required autoFocus
                         type="text"
@@ -60,28 +72,28 @@ export const EmployeeForm = () => {
                         />
                 </div>
             </fieldset>
-            {/* <fieldset>
+            <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">location:</label>
-                    <input 
+                    <label htmlFor="location">location: </label>
+                    <select 
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Technical Specialty"
                         onChange={
                             (evt) => {
                                 const copy = {...employee}
-                                copy.specialty = evt.target.value
+                                copy.location = evt.target.value
                                 addEmployee(copy)
                                 
                             }
                         } 
-                        />
+                        ><option value="0">Pick a location...</option>{locations.map(location => `<option value=${location.id}>${location.name}</option>`)}
+                        </select>
                 </div>
-            </fieldset> */}
+            </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="manager">manager:</label>
+                    <label htmlFor="manager">manager: </label>
                     <input 
                         type="radio"
                         onChange={
@@ -97,7 +109,7 @@ export const EmployeeForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="full time">full time:</label>
+                    <label htmlFor="full-time">full time: </label>
                     <input 
                         type="radio"
                         onChange={
@@ -113,7 +125,7 @@ export const EmployeeForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="specialty">specialty:</label>
+                    <label htmlFor="hourly-rate">Hourly Rate: </label>
                     <input 
                         required autoFocus
                         type="text"
