@@ -17,7 +17,7 @@ export const LocationList = () => {
         <>
             {
                 locations.map((location) => {
-                    return <p key={`location--${location.id}`}>{location.name}</p>
+                    return <p key={`location--${location.id}`}>{location.address}</p>
                 }
                 )
             }

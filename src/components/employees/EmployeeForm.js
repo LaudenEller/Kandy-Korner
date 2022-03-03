@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 export const EmployeeForm = () => {
     const [employee, addEmployee] = useState({
         name: "",
-        location: 1,
+        locationId: 1,
         manager: true,
         fullTime: true,
         hourlyRate: 16
@@ -28,7 +28,7 @@ export const EmployeeForm = () => {
     const hireEmployee = (event) => {
         const newEmployee = {
             name: employee.name,
-            location: employee.locationId,
+            locationId: employee.locationId,
             manager: employee.manager,
             fullTime: employee.fullTime,
             hourlyRate: employee.hourlyRate
@@ -74,26 +74,27 @@ export const EmployeeForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">location: </label>
-                    <select 
+                    <label htmlFor="location">Store </label>
+                    <select  
                         required autoFocus
                         type="text"
                         className="form-control"
                         onChange={
                             (evt) => {
                                 const copy = {...employee}
-                                copy.location = evt.target.value
+                                copy.locationId = evt.target.value
                                 addEmployee(copy)
                                 
                             }
                         } 
-                        ><option value="0">Pick a location...</option>{locations.map(location => `<option value=${location.id}>${location.name}</option>`)}
+                        ><option value="0">Pick a Location...</option>
+                        {locations.map(location => <option value={location.id}>{location.address}</option>)}
                         </select>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="manager">manager: </label>
+                    <label htmlFor="manager">Manager: </label>
                     <input 
                         type="radio"
                         onChange={
@@ -109,13 +110,13 @@ export const EmployeeForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="full-time">full time: </label>
+                    <label htmlFor="full-time">Full Time: </label>
                     <input 
                         type="radio"
                         onChange={
                             (evt) => {
                                 const copy = {...employee}
-                                copy.manager = evt.target.checked
+                                copy.fullTime = evt.target.checked
                                 addEmployee(copy)
                                 
                             }
@@ -130,11 +131,11 @@ export const EmployeeForm = () => {
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Rate in whole dollars eg. 12"
+                        placeholder="Rate in num: eg. 12"
                         onChange={
                             (evt) => {
                                 const copy = {...employee}
-                                copy.specialty = evt.target.value
+                                copy.hourlyRate = evt.target.value
                                 addEmployee(copy)
                                 
                             }

@@ -26,7 +26,7 @@ export const EmployeeList = () => {
             {
                 employees.map(
                     (employeeObject) => {
-                        return <p key={`employee--${employeeObject.id}`}>{employeeObject.name} works at our {employeeObject.location.name} location</p> // must use KEY attribute which acts like an Id for React
+                        return <p key={`employee--${employeeObject.id}`}>{employeeObject.name} works at our {employeeObject.location.address} location</p> // must use KEY attribute which acts like an Id for React
                     }
                 )
             }
