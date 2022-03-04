@@ -28,10 +28,10 @@ export const EmployeeForm = () => {
     const hireEmployee = (event) => {
         const newEmployee = {
             name: employee.name,
-            locationId: employee.locationId,
+            locationId: parseInt(employee.locationId),
             manager: employee.manager,
             fullTime: employee.fullTime,
-            hourlyRate: employee.hourlyRate
+            hourlyRate: parseInt(employee.hourlyRate)
         }
         
         event.preventDefault()
