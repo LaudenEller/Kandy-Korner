@@ -68,9 +68,6 @@ export const ProductList = () => {
     return (
         <>
             {
-                //ADD A QUANTITY FIELD FOR EACH PRODUCT AND PASS THE INPUT TO THE PURCHASEPRODUCT FUNCTION AS A PARAMETER
-
-
                 products.map((product) => {
                     return <p key={`product--${product.id}`}>
                         We have {product.quantity} {product.description}s which is a {product.productType.type} product with a cost per unit of {product.price}

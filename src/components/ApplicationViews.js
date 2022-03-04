@@ -5,6 +5,7 @@ import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { EmployeeList } from "./employees/EmployeeList";
 import { EmployeeForm } from "./employees/EmployeeForm";
 import { CustomerList } from "./customers/CustomerList";
+import { MyOrders } from "./products/MyOrders"
 
 export const ApplicationViews = () => {
     return (
@@ -23,6 +24,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route path="/customers">
                 <CustomerList />
+            </Route>
+            <Route path="/orders">
+                <MyOrders />
             </Route>
         </>
     )
