@@ -22,22 +22,20 @@ export const EmployeeList = () => {
         []
     )
 
-    // const update = () => {
-    //     fetch("http://localhost:8088/employees")
-    //         .then(res => res.json())
-    //         .then((employeeArray) => {
-    //             assignEmployees(employeeArray)
-    //         } // invoke function that modifies data, do not modify data directly like in vanillaJs
-    //         )
-    // }
+    const update = () => {
+        fetch("http://localhost:8088/employees?_expand=location")
+            .then(res => res.json())
+            .then((employeeArray) => {
+                assignEmployees(employeeArray)
+            } // invoke function that modifies data, do not modify data directly like in vanillaJs
+            )
+    }
 
     const fireEmployee = (id) => {
         fetch(`http://localhost:8088/employees/${id}`, {
             method: "DELETE"
         })
-        .then(() => {history.push("/locations")})
-        .then(() => {history.push("/employees")})
-            // .then(update())
+            .then(() => {update()}) // what is the difference between this method and this one: .then(update())???
     }
 
     return (

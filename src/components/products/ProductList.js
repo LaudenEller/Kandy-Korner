@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 export const ProductList = () => {
     const [products, setProduct] = useState([])
-    // initiate state for purchase and updatePurchase
+    // initiate state for purchase
     const [purchase, updatePurchase] = useState({
         customerId: 1,
         locationId: 1,
@@ -38,20 +38,23 @@ export const ProductList = () => {
         []
     )
 
+    // Declare a new function that accepts the id of the product the user wants to purchase as a parameter
     const PurchaseProduct = (eventId) => {
 
-        // Iterate through the productLocation array
-        // Use .find to return the productLocation with a productId that matches the purchased product's id
+        // Use .find method to find the productLocation that matches the product the user is trying to buy
         const foundProductLocation = productLocation.find(productLocation => productLocation.productId === eventId)
 
-
+        // Create a new purchase object with 
+            //the current user key value as a customerId
+            //the matching location from productLocation array in JSON
+            //the id of the selected product which was passed as a parameter from invocation on line 103
+            //the quantity the user chose from line 88
         const newPurchase = {
             customerId: parseInt(localStorage.getItem("kandy_customer")),
             locationId: foundProductLocation.locationId,
             productId: eventId,
             quantity: parseInt(purchase.quantity)
         }
-
 
         const fetchOption = {
             method: "POST",
@@ -69,7 +72,8 @@ export const ProductList = () => {
         <>
             {
                 products.map((product) => {
-                    return <p key={`product--${product.id}`}>
+                    return <div classN>
+                        <p key={`product--${product.id}`}>
                         We have {product.quantity} {product.description}s which is a {product.productType.type} product with a cost per unit of {product.price}
 
                         <fieldset>
@@ -101,6 +105,7 @@ export const ProductList = () => {
                             PurchaseProduct(product.id)
                         }}>Purchase</button>
                     </p>
+                    </div>
                 }
                 )
             }
