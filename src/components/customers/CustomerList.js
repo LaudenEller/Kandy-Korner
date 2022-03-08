@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getAllCustomers } from "../ApiManager"
 
 export const CustomerList = () => {
     const [customers, updateCustomers] = useState([]) // "WHAT STATE DO I WANT THIS COMPONENT TO RENDER?" 
@@ -10,8 +11,7 @@ export const CustomerList = () => {
    
     useEffect(
         () => {
-            fetch("http://localhost:8088/customers")
-                .then(res => res.json())
+            getAllCustomers()
                 .then((customerArray) => { 
                     updateCustomers(customerArray) } // invoke function that modifies data, do not modify data directly like in vanillaJs
                 )

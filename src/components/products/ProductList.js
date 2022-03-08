@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { getAllProductLocations, getAllProducts } from "../ApiManager"
 
 
 
@@ -16,8 +17,7 @@ export const ProductList = () => {
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/products?_expand=productType&_sort=productTypeId")
-                .then(res => res.json())
+            getAllProducts()
                 .then((data) => {
                     setProduct(data)
                 })
@@ -28,8 +28,7 @@ export const ProductList = () => {
     // Fetch the productLocation array from JSON and populate app state
     useEffect(
         () => {
-            fetch("http://localhost:8088/productLocations?_expand=location")
-                .then(res => res.json())
+            getAllProductLocations()
                 .then((data) => {
                     setProductLocation(data)
                 } // invoke function that modifies data, do not modify data directly like in vanillaJs
@@ -72,8 +71,8 @@ export const ProductList = () => {
         <>
             {
                 products.map((product) => {
-                    return <div classN>
-                        <p key={`product--${product.id}`}>
+                    return <div key={`product--${product.id}`}>
+                        <section>
                         We have {product.quantity} {product.description}s which is a {product.productType.type} product with a cost per unit of {product.price}
 
                         <fieldset>
@@ -104,7 +103,7 @@ export const ProductList = () => {
                         <button onClick={() => {
                             PurchaseProduct(product.id)
                         }}>Purchase</button>
-                    </p>
+                    </section>
                     </div>
                 }
                 )

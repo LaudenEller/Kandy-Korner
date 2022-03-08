@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getAllEmployees } from "../ApiManager"
 
 
 
@@ -12,8 +13,7 @@ export const EmployeeList = () => {
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/employees?_expand=location")
-                .then(res => res.json())
+           getAllEmployees()
                 .then((employeeArray) => {
                     assignEmployees(employeeArray)
                 } // invoke function that modifies data, do not modify data directly like in vanillaJs
